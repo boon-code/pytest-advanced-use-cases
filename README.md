@@ -28,6 +28,7 @@ Works fine, but quite cumbersome to in the test cases and in the fixtures:
 - Less protection against mistakes like messing up the state in a test case that uses `dut`
   or `session_dut`
 
+
 # DuT setup using markers
 
 Use only one fixture for the DuT and define the requested state via a marker
@@ -58,3 +59,9 @@ It seems like the better approach:
 
 - Also `pytest.mark.parametrize()` works like a charm, see `test_auto_dut_parametrized.py`
 
+
+# Pytest and Behavior-driven development (BDD)
+
+## TODO
+
+- Try `pytest-bdd`
