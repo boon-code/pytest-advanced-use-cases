@@ -56,6 +56,5 @@ It seems like the better approach:
     - Class level markers can also be used to structure test runs and avoid having to repeat
       the declaration of `dut_state` over and over
 
-## Open questions
+- Also `pytest.mark.parametrize()` works like a charm, see `test_auto_dut_parametrized.py`
 
-- How does it mix with other markers and `pytest.mark.parametrize`
