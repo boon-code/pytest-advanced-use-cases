@@ -1,4 +1,4 @@
-@example
+@bdd_example
 
 Feature: A simple example for BDD using pytest
 
