@@ -7,6 +7,20 @@ python:
   - "3.8-dev"
   - "nightly"
 install:
-  - pip install -r requirements.txt
+  pip install -r requirements.txt
 script:
-  - pytest
+  pytest
+
+# Extra job definition for Windows
+jobs:
+  include:
+    - name: "Python 3.7.4 on Windows"
+      os: windows
+      language: shell
+      install:
+        - choco install python --version 3.7.4
+        - py -3.7 -m pip install --upgrade pip
+        - py -3.7 -m pip install --user -r requirements.txt
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      script:
+        - py -3.7 -m pytest
