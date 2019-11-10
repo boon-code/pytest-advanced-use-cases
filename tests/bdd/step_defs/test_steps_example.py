@@ -35,4 +35,4 @@ def check_output(cli_config, output, capsys):
     cli = cli_config.cli_class(cli_config.params)
     cli.run()
     captured = capsys.readouterr()
-    assert output == captured.out.rstrip('\n')
+    assert output == captured.out.rstrip('\r\n')
