@@ -1,4 +1,6 @@
 import argparse
+from pkg_resources import resource_stream
+
 
 """
 This is a dummy module to evaluate pytest in advanced use cases
@@ -17,6 +19,9 @@ class DummyCli(object):
         parser_hello.set_defaults(cmd=self.cmd_hello)
         parser_hello.add_argument('--greet', action='store_true', default=False,
                                   help="Set this flag to indicate you want to be greeted")
+        # dummy-text command
+        parser_dummy_text = sub_parser.add_parser('dummy-text')
+        parser_dummy_text.set_defaults(cmd=self.cmd_dummy_text)
         # save for later use
         self._parser = parser
         self._args = parser.parse_args(args=argv)
@@ -34,6 +39,10 @@ class DummyCli(object):
             print("Hello, world!")
         else:
             print("Okay")
+
+    def cmd_dummy_text(self):
+        with resource_stream('dummy_mod', 'data/dummy-file.txt') as f:
+            print(f.read().decode('utf-8'))
 
     def run(self, *args, **kwargs):
         return self._args.cmd(*args, **kwargs)

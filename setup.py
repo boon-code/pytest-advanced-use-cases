@@ -15,6 +15,9 @@ setup(
         '': 'src'
     },
     packages=find_packages(where='./src'),
+    package_data={
+        'dummy_mod': ['data/dummy-file.txt']
+    },
     entry_points={
         'console_scripts': [
             'dummy-cli = dummy_mod:main',
