@@ -16,16 +16,23 @@ def cli_config():
 
 @given(parse('{cli} is started'))
 def some_cli(cli_config, cli):
-    cli_config.prog = cli
+    import dummy_mod
+    cli_config.cli_class = dummy_mod.DummyCli
+    cli_config.params = [cli]
 
 
-@when(parse('The parameter {param} is passed'))
+@when(parse('The parameter "{param}" is passed'))
 def cli_invoked(cli_config, param):
-    cli_config.param = param
+    cli_config.params.append(param)
+
+@when('No parameter is passed')
+def cli_invoked_no_param():
+    pass
 
 
 @then(parse('"{output}" is displayed'))
-def check_output(cli_config, output):
-    assert cli_config.prog == 'example-cli'
-    assert cli_config.param == '--greet'
-    assert output == 'Hello, world'
+def check_output(cli_config, output, capsys):
+    cli = cli_config.cli_class(cli_config.params)
+    cli.run()
+    captured = capsys.readouterr()
+    assert output == captured.out.rstrip('\n')
